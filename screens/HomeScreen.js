@@ -1,9 +1,19 @@
 import { render } from "react-dom";
-import { Text, View, TouchableOpacity, TextInput, Searchbutton,TextComponent, StyleSheet} from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, Searchbutton,TextComponent, StyleSheet,Constructor} from 'react-native';
 export default class HomeScreen extends React.Component{
+  constructor() { 
+    super(); 
+    this.state = { 
+      text: '', 
+      isSearchPressed: false, 
+      isLoading: false, 
+      word : "Loading...", 
+      lexicalCategory :'', 
+      definition : "" 
+    }}
   getWord=(word)=>{
     var searchKeyWord=word.toLowerCase()
-    var url = "https://rupinwhitehatjr.github.io/dictionary/%22+searchKeyword+%22.json"+searchKeyWord+".json"
+    var url = "https://rupinwhitehatjr.github.io/dictionary/"+searchKeyWord+".json"
     return fetch(url)
     .then((data)=>{
     if(data.status===200)
@@ -62,8 +72,8 @@ export default class HomeScreen extends React.Component{
 </Text>
 </View>
           <TextInput
-            style={StyleSheet.inputBox}
-            onChnageText={text=>{
+            style={styles.inputBox}
+            onChangeText={text=>{
                 this.setState({
                     text:text,
                     isSearchPressed:false,
@@ -76,7 +86,7 @@ export default class HomeScreen extends React.Component{
             
           value={this.state.text}
           />
-            <TouchableOpacity style={StyleSheet.SearchButton}
+            <TouchableOpacity style={styles.SearchButton}
             onPress={()=>{
 this.setState({isSearchPressed:true});
 this.getWord(this.state.text)
