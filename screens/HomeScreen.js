@@ -1,6 +1,7 @@
 import { render } from "react-dom";
+import react,{Component} from "react";
 import { Text, View, TouchableOpacity, TextInput, Searchbutton,TextComponent, StyleSheet,Constructor} from 'react-native';
-export default class HomeScreen extends React.Component{
+export default class HomeScreen extends Component{
   constructor() { 
     super(); 
     this.state = { 
@@ -27,19 +28,19 @@ export default class HomeScreen extends React.Component{
     .then((response)=>{
       var responseObject = response
       if(responseObject){
-        var wordData = responseObject.definations[0]
-        var defination=wordData.description
+        var wordData = responseObject.definitions[0]
+        var definition=wordData.description
         var lexicalCategory=wordData.wordtype
         this.setState({
           "word":this.state.text,
-          "defination":defination,
+          "definition":definition,
           "lexicalCategory":lexicalCategory
         })
       }
       else{
         this.setState({
           "word" : this.state.text,
-        "defination" : "Not Found",
+        "definition" : "Not Found",
         })
         
       }
@@ -65,10 +66,10 @@ export default class HomeScreen extends React.Component{
   {this.state.lexicalCategory}
 </Text>
 <Text style={{flexDIrection:'row',flexWrap:"wrap"}}>
-  Defination:{""}
+  definition:{""}
 </Text>
 <Text style={{fontSize:18}}>
-  {this.state.defination}
+  {this.state.definition}
 </Text>
 </View>
           <TextInput
@@ -80,7 +81,7 @@ export default class HomeScreen extends React.Component{
                     word:"Loading...",
                     lexicalCategory:'',
                     examples:[],
-                    defination:""
+                    definition:""
                 });
             }}
             

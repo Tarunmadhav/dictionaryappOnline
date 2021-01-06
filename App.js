@@ -8,7 +8,7 @@ export default class App extends React.Component {
     return (
      
 <View>
- 
+ <HomeScreen/>
 </View>
      
     )
